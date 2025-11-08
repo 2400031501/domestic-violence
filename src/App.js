@@ -58,7 +58,7 @@ function EmergencyButton() {
 
   return (
     <button className="emergency-exit-btn" onClick={handleExit}>
-      ⚠️ Quick Exit
+      ⚠ Quick Exit
     </button>
   );
 }
@@ -75,7 +75,7 @@ function Navbar({ isLoggedIn, onLogout }) {
   return (
     <nav className="navbar">
       <div className="nav-container">
-        <Link to="/" className="nav-logo">🛡️ SafeSupport</Link>
+        <Link to="/" className="nav-logo">🛡 SafeSupport</Link>
         <ul className="nav-menu">
           <li><Link to="/" className="nav-link">Home</Link></li>
           <li><Link to="/about" className="nav-link">About</Link></li>
@@ -103,7 +103,7 @@ function Home() {
   return (
     <div className="home-page">
       <section className="hero">
-        <h1>🛡️ SafeSupport</h1>
+        <h1>🛡 SafeSupport</h1>
         <h2>You Are Not Alone</h2>
         <p>Safe, confidential support for those experiencing domestic violence</p>
         <div className="hero-buttons">
@@ -142,13 +142,13 @@ function Home() {
         <h2>How We Can Help</h2>
         <div className="info-grid">
           <div className="info-card">
-            <h3>🛡️ Safety Planning</h3>
+            <h3>🛡 Safety Planning</h3>
             <p>Create a personalized safety plan to protect yourself and your loved ones.</p>
             <button className="btn-primary">Get Started</button>
           </div>
           
           <div className="info-card">
-            <h3>⚖️ Legal Support</h3>
+            <h3>⚖ Legal Support</h3>
             <p>Access legal resources and connect with legal advisors for guidance.</p>
             <button className="btn-primary">Get Help</button>
           </div>
@@ -272,7 +272,7 @@ function GetHelp() {
       <h1>Get Help Now</h1>
       
       <div className="emergency-banner">
-        <h2>⚠️ In Immediate Danger?</h2>
+        <h2>⚠ In Immediate Danger?</h2>
         <p>Call emergency services immediately</p>
         <a href="tel:100" className="btn-emergency-large">📞 Call 100 Now</a>
       </div>
@@ -412,7 +412,7 @@ function Grievances() {
           <div key={grievance.id} className="grievance-card">
             <div className="grievance-info">
               <h3>{grievance.title}</h3>
-              <span className={`status-badge ${grievance.status.toLowerCase().replace(' ', '-')}`}>
+              <span className={status-badge ${grievance.status.toLowerCase().replace(' ', '-')}}>
                 {grievance.status}
               </span>
             </div>
