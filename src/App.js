@@ -386,7 +386,7 @@ function Dashboard() {
 
 // Grievances Component
 function Grievances() {
-  const [grievances, setGrievances] = useState([
+  const [grievances] = useState([
     { id: 1, title: 'Sample Grievance 1', status: 'Under Review', date: '2025-11-08' },
     { id: 2, title: 'Sample Grievance 2', status: 'Resolved', date: '2025-11-07' }
   ]);
