@@ -1,10 +1,13 @@
-import React, { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Routes, Route, Link, useNavigate } from 'react-router-dom';
-import './App.css';
+import React, { useState, useEffect } from "react";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Link,
+  useNavigate,
+} from "react-router-dom";
+import "./App.css";
 
-// Component imports handled within this file
-
-// App Component
 function App() {
   const [showEmergencyButton, setShowEmergencyButton] = useState(true);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -13,9 +16,9 @@ function App() {
     const handleScroll = () => {
       setShowEmergencyButton(window.scrollY > 50);
     };
-    
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   const handleLogout = () => {
@@ -28,14 +31,14 @@ function App() {
         <Navbar isLoggedIn={isLoggedIn} onLogout={handleLogout} />
         <main className="main-content">
           <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="/get-help" element={<GetHelp />} />
-          <Route path="/login" element={<Login setIsLoggedIn={setIsLoggedIn} />} />
-          <Route path="/signup" element={<SignUp />} />
-          <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/grievances" element={<Grievances />} />
+            <Route path="/" element={<Home />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/get-help" element={<GetHelp />} />
+            <Route path="/login" element={<Login setIsLoggedIn={setIsLoggedIn} />} />
+            <Route path="/signup" element={<SignUp />} />
+            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/grievances" element={<Grievances />} />
           </Routes>
         </main>
         <Footer />
@@ -47,13 +50,14 @@ function App() {
 
 export default App;
 
-// Emergency Exit Component (defined inside this file)
+// ---------------- Emergency Button ----------------
+
 function EmergencyButton() {
   const handleExit = () => {
     localStorage.clear();
     sessionStorage.clear();
-    window.open('https://www.google.com', '_blank');
-    window.location.replace('https://www.weather.com');
+    window.open("https://www.google.com", "_blank");
+    window.location.replace("https://www.weather.com");
   };
 
   return (
@@ -63,42 +67,81 @@ function EmergencyButton() {
   );
 }
 
-// Navbar Component (defined inside this file)
+// ---------------- Navbar ----------------
+
 function Navbar({ isLoggedIn, onLogout }) {
   const navigate = useNavigate();
 
-  const handleLogout = () => {
+  const handleLogoutClick = () => {
     onLogout();
-    navigate('/');
+    navigate("/");
   };
 
   return (
     <nav className="navbar">
       <div className="nav-container">
-        <Link to="/" className="nav-logo">🛡 SafeSupport</Link>
+        <Link to="/" className="nav-logo">
+          🛡 SafeSupport
+        </Link>
         <ul className="nav-menu">
-          <li><Link to="/" className="nav-link">Home</Link></li>
-          <li><Link to="/about" className="nav-link">About</Link></li>
-          <li><Link to="/contact" className="nav-link">Contact</Link></li>
+          <li>
+            <Link to="/" className="nav-link">
+              Home
+            </Link>
+          </li>
+          <li>
+            <Link to="/about" className="nav-link">
+              About
+            </Link>
+          </li>
+          <li>
+            <Link to="/contact" className="nav-link">
+              Contact
+            </Link>
+          </li>
           {isLoggedIn ? (
             <>
-              <li><Link to="/dashboard" className="nav-link">Dashboard</Link></li>
-              <li><button onClick={handleLogout} className="nav-link btn-logout">Logout</button></li>
+              <li>
+                <Link to="/dashboard" className="nav-link">
+                  Dashboard
+                </Link>
+              </li>
+              <li>
+                <button
+                  onClick={handleLogoutClick}
+                  className="nav-link btn-logout"
+                >
+                  Logout
+                </button>
+              </li>
             </>
           ) : (
             <>
-              <li><Link to="/login" className="nav-link">Login</Link></li>
-              <li><Link to="/signup" className="nav-link">Sign Up</Link></li>
+              <li>
+                <Link to="/login" className="nav-link">
+                  Login
+                </Link>
+              </li>
+              <li>
+                <Link to="/signup" className="nav-link">
+                  Sign Up
+                </Link>
+              </li>
             </>
           )}
-          <li><Link to="/get-help" className="nav-link btn-get-help">Get Help</Link></li>
+          <li>
+            <Link to="/get-help" className="nav-link btn-get-help">
+              Get Help
+            </Link>
+          </li>
         </ul>
       </div>
     </nav>
   );
 }
 
-// Home Page Component (defined inside this file)
+// ---------------- Home ----------------
+
 function Home() {
   return (
     <div className="home-page">
@@ -107,7 +150,9 @@ function Home() {
         <h2>You Are Not Alone</h2>
         <p>Safe, confidential support for those experiencing domestic violence</p>
         <div className="hero-buttons">
-          <a href="tel:100" className="btn-emergency">📞 Call Emergency: 100</a>
+          <a href="tel:100" className="btn-emergency">
+            📞 Call Emergency: 100
+          </a>
           <button className="btn-secondary">Learn More</button>
         </div>
       </section>
@@ -119,21 +164,27 @@ function Home() {
             <h3>Police Emergency</h3>
             <p className="helpline-number">100</p>
             <p>Immediate emergency response</p>
-            <a href="tel:100" className="btn-call">📞 Call Now</a>
+            <a href="tel:100" className="btn-call">
+              📞 Call Now
+            </a>
           </div>
-          
+
           <div className="helpline-card">
             <h3>Women's Helpline</h3>
             <p className="helpline-number">181</p>
             <p>24/7 support for women</p>
-            <a href="tel:181" className="btn-call">📞 Call Now</a>
+            <a href="tel:181" className="btn-call">
+              📞 Call Now
+            </a>
           </div>
-          
+
           <div className="helpline-card">
             <h3>Domestic Violence Helpline</h3>
-            <p className="helpline-number">1800-XXX-XXXX</p>
+            <p className="helpline-number">1800-123-4567</p>
             <p>Confidential support</p>
-            <a href="tel:1800XXXXXXX" className="btn-call">📞 Call Now</a>
+            <a href="tel:18001234567" className="btn-call">
+              📞 Call Now
+            </a>
           </div>
         </div>
       </section>
@@ -143,25 +194,33 @@ function Home() {
         <div className="info-grid">
           <div className="info-card">
             <h3>🛡 Safety Planning</h3>
-            <p>Create a personalized safety plan to protect yourself and your loved ones.</p>
+            <p>
+              Create a personalized safety plan to protect yourself and your loved
+              ones.
+            </p>
             <button className="btn-primary">Get Started</button>
           </div>
-          
+
           <div className="info-card">
             <h3>⚖ Legal Support</h3>
-            <p>Access legal resources and connect with legal advisors for guidance.</p>
+            <p>
+              Access legal resources and connect with legal advisors for guidance.
+            </p>
             <button className="btn-primary">Get Help</button>
           </div>
-          
+
           <div className="info-card">
             <h3>💬 Counseling</h3>
             <p>Connect with trained counselors who understand your situation.</p>
             <button className="btn-primary">Talk Now</button>
           </div>
-          
+
           <div className="info-card">
             <h3>📚 Resources</h3>
-            <p>Access comprehensive information about your rights and support services.</p>
+            <p>
+              Access comprehensive information about your rights and support
+              services.
+            </p>
             <button className="btn-primary">View Resources</button>
           </div>
         </div>
@@ -172,19 +231,30 @@ function Home() {
         <div className="tips-grid">
           <div className="tip-card">
             <h4>🔒 Online Safety</h4>
-            <p>Use private browsing mode and clear your history. Use the Quick Exit button if needed.</p>
+            <p>
+              Use private browsing mode and clear your history. Use the Quick Exit
+              button if needed.
+            </p>
           </div>
           <div className="tip-card">
             <h4>📱 Communication</h4>
-            <p>Use a safe phone or computer that your abuser doesn't have access to.</p>
+            <p>
+              Use a safe phone or computer that your abuser doesn't have access to.
+            </p>
           </div>
           <div className="tip-card">
             <h4>🏃 Safety Plan</h4>
-            <p>Create a safety plan with escape routes, emergency contacts, and important documents.</p>
+            <p>
+              Create a safety plan with escape routes, emergency contacts, and
+              important documents.
+            </p>
           </div>
           <div className="tip-card">
             <h4>🤝 Support Network</h4>
-            <p>Reach out to trusted friends, family, or professionals who can help you.</p>
+            <p>
+              Reach out to trusted friends, family, or professionals who can help
+              you.
+            </p>
           </div>
         </div>
       </section>
@@ -192,24 +262,45 @@ function Home() {
   );
 }
 
-// About Page Component
+// ---------------- About ----------------
+
 function About() {
   return (
     <div className="page-container">
       <h1>About SafeSupport</h1>
-      <p>SafeSupport is a gender-responsive platform dedicated to providing comprehensive, confidential, and accessible support for individuals experiencing domestic violence.</p>
-      
+      <p>
+        SafeSupport is a gender-responsive platform dedicated to providing
+        comprehensive, confidential, and accessible support for individuals
+        experiencing domestic violence.
+      </p>
+
       <h2>Our Mission</h2>
-      <p>We believe in gender equality, human rights, and the fundamental right to live free from violence and abuse. Our mission is to empower survivors by providing information, resources, and support to make informed decisions.</p>
-      
+      <p>
+        We believe in gender equality, human rights, and the fundamental right to
+        live free from violence and abuse. Our mission is to empower survivors by
+        providing information, resources, and support to make informed decisions.
+      </p>
+
       <h2>Our Values</h2>
       <ul>
-        <li><strong>Confidentiality:</strong> Your privacy and safety are our highest priorities.</li>
-        <li><strong>Gender Equality:</strong> We provide inclusive support services for all genders.</li>
-        <li><strong>Empowerment:</strong> We help you take control of your situation.</li>
-        <li><strong>Compassion:</strong> We approach every individual with empathy and respect.</li>
+        <li>
+          <strong>Confidentiality:</strong> Your privacy and safety are our
+          highest priorities.
+        </li>
+        <li>
+          <strong>Gender Equality:</strong> We provide inclusive support services
+          for all genders.
+        </li>
+        <li>
+          <strong>Empowerment:</strong> We help you take control of your
+          situation.
+        </li>
+        <li>
+          <strong>Compassion:</strong> We approach every individual with empathy
+          and respect.
+        </li>
       </ul>
-      
+
       <h2>What We Offer</h2>
       <ul>
         <li>24/7 access to resources and support</li>
@@ -223,26 +314,38 @@ function About() {
   );
 }
 
-// Contact Page Component
+// ---------------- Contact ----------------
+
 function Contact() {
   return (
     <div className="page-container">
       <h1>Contact Us</h1>
-      
+
       <h2>Emergency Contacts</h2>
       <div className="contact-info">
-        <p><strong>Police Emergency:</strong> <a href="tel:100">100</a></p>
-        <p><strong>Women's Helpline:</strong> <a href="tel:181">181</a></p>
-        <p><strong>National Domestic Violence Helpline:</strong> <a href="tel:1800XXXXXXX">1800-XXX-XXXX</a></p>
+        <p>
+          <strong>Police Emergency:</strong> <a href="tel:100">100</a>
+        </p>
+        <p>
+          <strong>Women's Helpline:</strong> <a href="tel:181">181</a>
+        </p>
+        <p>
+          <strong>National Domestic Violence Helpline:</strong>{" "}
+          <a href="tel:18001234567">1800-123-4567</a>
+        </p>
       </div>
-      
+
       <h2>Get In Touch</h2>
       <p>For non-emergency support, questions, or additional information:</p>
       <div className="contact-info">
-        <p><strong>Email:</strong> support@safesupport.org</p>
-        <p><strong>Address:</strong> [Your Organization Address]</p>
+        <p>
+          <strong>Email:</strong> support@safesupport.org
+        </p>
+        <p>
+          <strong>Address:</strong> [Your Organization Address]
+        </p>
       </div>
-      
+
       <div className="contact-form">
         <h3>Send us a message</h3>
         <form>
@@ -258,53 +361,58 @@ function Contact() {
             <label>Message:</label>
             <textarea rows="5" placeholder="Your message"></textarea>
           </div>
-          <button type="submit" className="btn-primary">Send Message</button>
+          <button type="submit" className="btn-primary">
+            Send Message
+          </button>
         </form>
       </div>
     </div>
   );
 }
 
-// Get Help Page Component
+// ---------------- Get Help ----------------
+
 function GetHelp() {
   return (
     <div className="page-container">
       <h1>Get Help Now</h1>
-      
+
       <div className="emergency-banner">
         <h2>⚠ In Immediate Danger?</h2>
         <p>Call emergency services immediately</p>
-        <a href="tel:100" className="btn-emergency-large">📞 Call 100 Now</a>
+        <a href="tel:100" className="btn-emergency-large">
+          📞 Call 100 Now
+        </a>
       </div>
-      
+
       <h2>Available Support Services</h2>
-      
+
       <div className="services-list">
         <div className="service-item">
           <h3>Emergency Shelter</h3>
           <p>Safe, confidential emergency accommodation available 24/7</p>
           <button className="btn-primary">Find Shelter</button>
         </div>
-        
+
         <div className="service-item">
           <h3>Legal Consultation</h3>
           <p>Free legal advice from qualified legal advisors</p>
           <button className="btn-primary">Get Legal Help</button>
         </div>
-        
+
         <div className="service-item">
           <h3>Counseling Services</h3>
           <p>Professional counseling and mental health support</p>
           <button className="btn-primary">Talk to a Counselor</button>
         </div>
-        
+
         <div className="service-item">
           <h3>Safety Planning</h3>
           <p>Create a personalized safety plan for you and your children</p>
           <button className="btn-primary">Create Safety Plan</button>
         </div>
       </div>
-      
+
       <div className="warning-signs">
         <h2>Warning Signs of Domestic Violence</h2>
         <div className="signs-grid">
@@ -346,7 +454,8 @@ function GetHelp() {
   );
 }
 
-// Dashboard Component
+// ---------------- Dashboard ----------------
+
 function Dashboard() {
   return (
     <div className="dashboard-container">
@@ -354,26 +463,28 @@ function Dashboard() {
         <h1>Welcome Back</h1>
         <p>Your Safe Space Dashboard</p>
       </div>
-      
+
       <div className="dashboard-grid">
         <div className="dashboard-card">
           <h3>📝 My Grievances</h3>
           <p>Track and manage your submitted grievances</p>
-          <Link to="/grievances" className="btn-primary">View Grievances</Link>
+          <Link to="/grievances" className="btn-primary">
+            View Grievances
+          </Link>
         </div>
-        
+
         <div className="dashboard-card">
           <h3>🔒 Safety Plan</h3>
           <p>Update and review your safety plan</p>
           <button className="btn-primary">View Plan</button>
         </div>
-        
+
         <div className="dashboard-card">
           <h3>📞 Support Network</h3>
           <p>Manage your emergency contacts</p>
           <button className="btn-primary">View Contacts</button>
         </div>
-        
+
         <div className="dashboard-card">
           <h3>📋 Resources</h3>
           <p>Access your saved resources</p>
@@ -384,11 +495,22 @@ function Dashboard() {
   );
 }
 
-// Grievances Component
+// ---------------- Grievances ----------------
+
 function Grievances() {
   const [grievances] = useState([
-    { id: 1, title: 'Sample Grievance 1', status: 'Under Review', date: '2025-11-08' },
-    { id: 2, title: 'Sample Grievance 2', status: 'Resolved', date: '2025-11-07' }
+    {
+      id: 1,
+      title: "Sample Grievance 1",
+      status: "Under Review",
+      date: "2025-11-08",
+    },
+    {
+      id: 2,
+      title: "Sample Grievance 2",
+      status: "Resolved",
+      date: "2025-11-07",
+    },
   ]);
 
   return (
@@ -408,11 +530,15 @@ function Grievances() {
           </select>
         </div>
 
-        {grievances.map(grievance => (
+        {grievances.map((grievance) => (
           <div key={grievance.id} className="grievance-card">
             <div className="grievance-info">
               <h3>{grievance.title}</h3>
-              <span className={`status-badge ${grievance.status.toLowerCase().replace(' ', '-')}`}>
+              <span
+                className={`status-badge ${grievance.status
+                  .toLowerCase()
+                  .replace(" ", "-")}`}
+              >
                 {grievance.status}
               </span>
             </div>
@@ -425,28 +551,27 @@ function Grievances() {
   );
 }
 
-// Login Component
+// ---------------- Login ----------------
+
 function Login({ setIsLoggedIn }) {
   const [formData, setFormData] = useState({
-    email: '',
-    password: ''
+    email: "",
+    password: "",
   });
   const navigate = useNavigate();
 
   const handleChange = (e) => {
     setFormData({
       ...formData,
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
     });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Simulated login success - in real app, you'd verify credentials
-    console.log('Login attempt:', formData);
-    // Set login state and redirect to dashboard
+    console.log("Login attempt:", formData);
     setIsLoggedIn(true);
-    navigate('/dashboard');
+    navigate("/dashboard");
   };
 
   return (
@@ -478,7 +603,9 @@ function Login({ setIsLoggedIn }) {
               required
             />
           </div>
-          <button type="submit" className="btn-primary">Login</button>
+          <button type="submit" className="btn-primary">
+            Login
+          </button>
         </form>
         <p className="auth-footer">
           Don't have an account? <Link to="/signup">Sign Up</Link>
@@ -488,19 +615,20 @@ function Login({ setIsLoggedIn }) {
   );
 }
 
-// SignUp Component
+// ---------------- Sign Up ----------------
+
 function SignUp() {
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    password: '',
-    confirmPassword: ''
+    name: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
   });
 
   const handleChange = (e) => {
     setFormData({
       ...formData,
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
     });
   };
 
@@ -510,8 +638,7 @@ function SignUp() {
       alert("Passwords don't match!");
       return;
     }
-    // Add signup logic here
-    console.log('Signup attempt:', formData);
+    console.log("Signup attempt:", formData);
   };
 
   return (
@@ -567,7 +694,9 @@ function SignUp() {
               required
             />
           </div>
-          <button type="submit" className="btn-primary">Sign Up</button>
+          <button type="submit" className="btn-primary">
+            Sign Up
+          </button>
         </form>
         <p className="auth-footer">
           Already have an account? <Link to="/login">Login</Link>
@@ -577,40 +706,59 @@ function SignUp() {
   );
 }
 
-// Footer Component (defined inside this file)
+// ---------------- Footer ----------------
+
 function Footer() {
   return (
     <footer className="footer">
       <div className="footer-container">
         <div className="footer-section">
           <h3>Emergency Contacts</h3>
-          <p><strong>Police Emergency:</strong> 100</p>
-          <p><strong>Women's Helpline:</strong> 181</p>
-          <p><strong>National Helpline:</strong> 1800-XXX-XXXX</p>
+          <p>
+            <strong>Police Emergency:</strong> 100
+          </p>
+          <p>
+            <strong>Women's Helpline:</strong> 181
+          </p>
+          <p>
+            <strong>National Helpline:</strong> 1800-123-4567
+          </p>
         </div>
-        
+
         <div className="footer-section">
           <h3>Quick Links</h3>
           <ul>
-            <li><Link to="/">Home</Link></li>
-            <li><Link to="/about">About Us</Link></li>
-            <li><Link to="/contact">Contact</Link></li>
-            <li><Link to="/get-help">Get Help</Link></li>
+            <li>
+              <Link to="/">Home</Link>
+            </li>
+            <li>
+              <Link to="/about">About Us</Link>
+            </li>
+            <li>
+              <Link to="/contact">Contact</Link>
+            </li>
+            <li>
+              <Link to="/get-help">Get Help</Link>
+            </li>
           </ul>
         </div>
-        
+
         <div className="footer-section">
           <h3>Safety Notice</h3>
-          <p>Use the Quick Exit button (top right) or press Shift+Esc to quickly leave this site.</p>
+          <p>
+            Use the Quick Exit button (top right) or press Shift+Esc to quickly
+            leave this site.
+          </p>
           <p>Your safety is our priority.</p>
         </div>
       </div>
-      
+
       <div className="footer-bottom">
-        <p>&copy; 2025 SafeSupport. All rights reserved. This platform is committed to gender equality and safety.</p>
+        <p>
+          &copy; 2025 SafeSupport. All rights reserved. This platform is committed
+          to gender equality and safety.
+        </p>
       </div>
     </footer>
   );
 }
-
-// End of components
