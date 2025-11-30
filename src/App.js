@@ -412,7 +412,7 @@ function Grievances() {
           <div key={grievance.id} className="grievance-card">
             <div className="grievance-info">
               <h3>{grievance.title}</h3>
-              <span className={status-badge ${grievance.status.toLowerCase().replace(' ', '-')}}>
+              <span className={`status-badge ${grievance.status.toLowerCase().replace(' ', '-')}`}>
                 {grievance.status}
               </span>
             </div>
